@@ -39,5 +39,4 @@ Les résultats de la classification et de l’explicabilité sont ensuite exploi
 
 ## Structure du dépôt
 
-Le dépôt est structuré de manière modulaire afin de séparer clairement les responsabilités techniques :
-
+Le dépôt est structuré de manière modulaire afin de séparer clairement les responsabilités techniques.
