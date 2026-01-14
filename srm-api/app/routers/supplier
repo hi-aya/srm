@@ -32,3 +32,4 @@ def list_suppliers():
             status_code=500,
             detail=str(e)
         )
+
