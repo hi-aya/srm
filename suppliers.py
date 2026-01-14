@@ -1,0 +1,34 @@
+from fastapi import APIRouter, HTTPException
+from app.services.supabase_client import get_supabase
+
+router = APIRouter(prefix="/suppliers", tags=["suppliers"])
+
+
+@router.get("/")
+def list_suppliers():
+    sb = get_supabase()
+    if sb is None:
+        raise HTTPException(
+            status_code=500,
+            detail="Supabase client not initialized"
+        )
+
+    try:
+        # 🔒 NE RENVOIE QUE LES FOURNISSEURS VALIDES
+        res = (
+            sb.table("suppliers")
+            .select("uuid,name,country")
+            .neq("name", "1")
+            .neq("name", "2")
+            .neq("name", "3")
+            .execute()
+        )
+
+        return res.data
+
+    except Exception as e:
+        print("❌ ERROR /suppliers:", repr(e))
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
